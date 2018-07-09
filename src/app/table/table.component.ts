@@ -13,12 +13,12 @@ export class TableComponent implements OnInit {
 
   constructor(private httpService: HttpClient) { }
 
-  data: string [];
+  data: any [];
 
   ngOnInit() {
     this.httpService.get('./assets/data.json').subscribe(
       data => {
-        this.data = data as string [];
+        this.data = data as any [];
       },
       (err: HttpErrorResponse) => {
         console.log (err.message);
