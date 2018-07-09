@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-table',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableComponent implements OnInit {
 
-  constructor() { }
+  title = 'JSON to Table';
+
+  constructor(private httpService: HttpClient) { }
+
+  data: string [];
 
   ngOnInit() {
+    this.httpService.get('./assets/data.json').subscribe(
+      data => {
+        this.data = data as string [];
+      },
+      (err: HttpErrorResponse) => {
+        console.log (err.message);
+      }
+    );
   }
 
 }
